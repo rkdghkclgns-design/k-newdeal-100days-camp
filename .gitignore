@@ -1,6 +1,9 @@
 # bkit plugin state
 .bkit/
 
+# local preview / tooling config
+.claude/
+
 # image-slot runtime sidecar (generated at runtime)
 .image-slots.state.json
 

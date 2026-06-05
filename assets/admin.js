@@ -3,7 +3,7 @@
    인라인 문구 수정 · 항목(메뉴/STEP/혜택/FAQ) CRUD · localStorage 저장
    ============================================================ */
 
-const STORE_KEY = "knewdeal_landing_content_v3";
+const STORE_KEY = "knewdeal_landing_content_v4";
 const ADMIN_PASS = "0000"; // 관리자 비밀번호
 
 window.ADMIN = false;
@@ -77,7 +77,7 @@ const NEW_ITEM = {
   "solution.regions": () => "지역",
   "curriculum.steps": () => ({ tag: "STEP", lv: "LV.0", title: "새 퀘스트", desc: "설명을 입력하세요." }),
   "rewards.cards": () => ({ tag: "참여자 100% 지급", icon: "sparkle", value: "NEW", unit: "", title: "새 혜택", desc: "설명을 입력하세요." }),
-  "nexon.cards": () => ({ tag: "TAG", strong: "강조 문구", title: "새 혜택", desc: "설명을 입력하세요.", slot: "nexon-x-" + Date.now() }),
+  "nexon.cards": () => ({ tag: "TAG", strong: "강조 문구", title: "새 혜택", desc: "설명을 입력하세요.", slot: "nexon-x-" + Date.now(), art: "" }),
   "eligibility.cards": () => ({ icon: "user", title: "새 조건", desc: "설명을 입력하세요." }),
   "faq.items": () => ({ q: "질문을 입력하세요.", a: "답변을 입력하세요." })
 };

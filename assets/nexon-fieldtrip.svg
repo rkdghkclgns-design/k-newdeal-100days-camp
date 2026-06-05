@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="판교 넥슨 사옥 견학">
+  <defs>
+    <linearGradient id="f_bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1830"/><stop offset="1" stop-color="#0b0d13"/>
+    </linearGradient>
+    <radialGradient id="f_glow" cx="50%" cy="28%" r="60%">
+      <stop offset="0" stop-color="#7b61ff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#7b61ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="f_pin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9d86ff"/><stop offset="1" stop-color="#7b61ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" fill="url(#f_bg)"/>
+  <rect width="480" height="300" fill="url(#f_glow)"/>
+
+  <!-- stars -->
+  <g fill="#cdbcff">
+    <circle cx="70" cy="60" r="1.8" opacity="0.8"/><circle cx="120" cy="38" r="1.3" opacity="0.6"/>
+    <circle cx="410" cy="52" r="1.8" opacity="0.8"/><circle cx="360" cy="34" r="1.3" opacity="0.6"/>
+    <circle cx="44" cy="120" r="1.4" opacity="0.5"/><circle cx="436" cy="118" r="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- NEXON Pangyo HQ: rectangular, strong horizontal lines, glass facade -->
+  <g transform="translate(240,0)">
+    <rect x="-118" y="92" width="236" height="176" rx="7" fill="#121422" stroke="#3a3f57" stroke-width="2"/>
+    <rect x="-118" y="92" width="236" height="9" rx="4" fill="#566089"/>
+    <g fill="#1b2236">
+      <rect x="-108" y="110" width="216" height="22" rx="4"/>
+      <rect x="-108" y="140" width="216" height="22" rx="4"/>
+      <rect x="-108" y="170" width="216" height="22" rx="4"/>
+      <rect x="-108" y="200" width="216" height="22" rx="4"/>
+    </g>
+    <g stroke="#0e1422" stroke-width="3">
+      <line x1="-65" y1="110" x2="-65" y2="222"/>
+      <line x1="-22" y1="110" x2="-22" y2="222"/>
+      <line x1="22" y1="110" x2="22" y2="222"/>
+      <line x1="65" y1="110" x2="65" y2="222"/>
+    </g>
+    <!-- lit windows -->
+    <rect x="-100" y="114" width="30" height="14" rx="2" fill="#7b61ff" fill-opacity="0.9"/>
+    <rect x="34" y="144" width="30" height="14" rx="2" fill="#f5a623" fill-opacity="0.85"/>
+    <rect x="-12" y="174" width="30" height="14" rx="2" fill="#9d86ff" fill-opacity="0.8"/>
+    <rect x="70" y="204" width="30" height="14" rx="2" fill="#7b61ff" fill-opacity="0.7"/>
+    <rect x="-100" y="204" width="30" height="14" rx="2" fill="#cdbcff" fill-opacity="0.55"/>
+    <!-- open ground entrance -->
+    <rect x="-24" y="236" width="48" height="32" rx="3" fill="#0b0d13"/>
+    <rect x="-24" y="236" width="48" height="32" rx="3" fill="#7b61ff" fill-opacity="0.18" stroke="#7b61ff" stroke-width="1.5"/>
+  </g>
+
+  <!-- ground -->
+  <rect x="58" y="266" width="364" height="3" rx="1.5" fill="#3a3f57" opacity="0.6"/>
+
+  <!-- location pin -->
+  <g transform="translate(240,16) scale(0.82)">
+    <path d="M0 0 c-19 0 -32 14.5 -32 32 c0 23 32 46 32 46 c0 0 32 -23 32 -46 c0 -17.5 -13 -32 -32 -32 Z" fill="url(#f_pin)"/>
+    <circle cy="32" r="11.5" fill="#0b0d13"/>
+  </g>
+</svg>

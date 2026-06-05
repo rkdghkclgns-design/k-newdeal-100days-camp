@@ -15,6 +15,7 @@ const IC = {
   chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path d="M18 3v16"/></svg>',
   laptop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20M9 20l.5-2h5l.5 2"/></svg>',
+  cash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.4v5.2M18 9.4v5.2"/></svg>',
   lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
   unlock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-1.9"/></svg>',
   menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
@@ -182,26 +183,34 @@ function renderCurriculum() {
 }
 
 /* ---------------- REWARDS (수업) ---------------- */
+/* per-card accent by icon: 노트북=blue(기술) · Claude=clay(브랜드색) · 장려금=gold(보상) */
+const REWARD_ACCENT = { laptop: "blue", sparkle: "clay", coin: "gold", cash: "gold", book: "violet" };
+/* highlight the literal "100%" token (admin still edits plain text) */
+function hl100(text) { return esc(text).replace(/100\s*%/g, '<span class="hl-100">100%</span>'); }
+
 function renderRewards() {
   const r = S.rewards;
   $("rewards").innerHTML = `
     <div class="container">
       <div class="section-head reveal">
         <span class="kicker"${ed("rewards.kicker")}>${esc(r.kicker)}</span>
-        <h2${ed("rewards.title")}>${esc(r.title)}</h2>
+        <h2${ed("rewards.title")}>${hl100(r.title)}</h2>
         <p${ed("rewards.sub")}>${esc(r.sub)}</p>
       </div>
       <div class="reward-grid" data-list="rewards.cards">
-        ${r.cards.map((c, i) => `
-          <div class="reward-card reveal" data-li="${i}">
-            <span class="rshine"></span>
+        ${r.cards.map((c, i) => {
+          const acc = REWARD_ACCENT[c.icon] || "blue";
+          return `
+          <div class="reward-card reveal theme-${acc}" data-li="${i}">
+            <span class="rshine ${acc}"></span>
             <span class="rtag">${IC.check}<span${ed("rewards.cards." + i + ".tag")}>${esc(c.tag)}</span></span>
-            <div class="ricon">${IC[c.icon] || IC.coin}</div>
+            <div class="ricon ${acc}">${IC[c.icon] || IC.cash}</div>
             <div class="rvalue"><span${ed("rewards.cards." + i + ".value")}>${esc(c.value)}</span> <small${ed("rewards.cards." + i + ".unit")}>${esc(c.unit)}</small></div>
             <h3${ed("rewards.cards." + i + ".title")}>${esc(c.title)}</h3>
             <p${ed("rewards.cards." + i + ".desc")}>${esc(c.desc)}</p>
             ${adminItemBtns("rewards.cards", i)}
-          </div>`).join("")}
+          </div>`;
+        }).join("")}
       </div>
       ${adminAddBtnCenter("rewards.cards", "혜택 카드 추가")}
     </div>`;
@@ -220,7 +229,7 @@ function renderNexon() {
       <div class="nexon-grid" data-list="nexon.cards">
         ${n.cards.map((c, i) => `
           <div class="nexon-card reveal" data-li="${i}">
-            <div class="nc-art"><image-slot id="${esc(c.slot || "nexon-" + i)}" shape="rect" placeholder="이미지 드래그"></image-slot></div>
+            <div class="nc-art"><image-slot id="${esc(c.slot || "nexon-" + i)}" shape="rect"${c.art ? ` src="${esc(c.art)}"` : ""} placeholder="이미지 드래그"></image-slot></div>
             <div class="nc-body">
               <div class="nc-tag"${ed("nexon.cards." + i + ".tag")}>${esc(c.tag)}</div>
               <div class="nc-strong"${ed("nexon.cards." + i + ".strong")}>${esc(c.strong)}</div>

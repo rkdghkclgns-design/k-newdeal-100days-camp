@@ -18,6 +18,10 @@
   --gold-050: #fff6e6;
   --violet: #7b61ff;
   --violet-050: #f1edff;
+  /* Claude/Anthropic brand clay (수업 혜택 — Claude 카드) */
+  --clay: #d97757;
+  --clay-deep: #b85a3a;
+  --clay-050: #fdf1ec;
   --green: #1fae7a;
   --green-050: #e7f8f1;
   /* Ink / surfaces */
@@ -284,9 +288,20 @@ section { position: relative; }
 .empathy-item.on { background: var(--green-050); }
 .empathy-item.on .et { color: var(--ink); }
 .empathy-item .et { font-size: clamp(15px, 1.7vw, 18px); font-weight: 500; color: var(--ink-2); text-wrap: pretty; }
-.empathy-turn { text-align: center; margin-top: 44px; transition: transform 0.3s ease; transform-origin: center; }
-@keyframes turnPop { 0% { transform: scale(1); } 30% { transform: scale(1.13); } 56% { transform: scale(0.99); } 100% { transform: scale(1); } }
-.empathy-turn.pop { animation: turnPop 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.empathy-turn { text-align: center; margin-top: 44px; transition: transform 0.5s ease; transform-origin: center; }
+/* gentle, smooth emphasis — soft swell + glow rather than a sharp bounce */
+@keyframes turnPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.05); }
+  72%  { transform: scale(1.012); }
+  100% { transform: scale(1); }
+}
+@keyframes turnGlow {
+  0%, 100% { text-shadow: 0 0 0 rgba(47, 107, 255, 0); }
+  45%      { text-shadow: 0 10px 34px rgba(47, 107, 255, 0.22); }
+}
+.empathy-turn.pop { animation: turnPop 1.8s cubic-bezier(0.33, 0.85, 0.3, 1); }
+.empathy-turn.pop .t1 { animation: turnGlow 1.8s ease-in-out; }
 .empathy-turn .t1 { font-size: clamp(22px, 3vw, 34px); font-weight: 800; letter-spacing: -0.02em; }
 .empathy-turn .t2 { font-size: clamp(16px, 2vw, 21px); color: var(--muted); margin-top: 10px; }
 
@@ -359,14 +374,39 @@ section { position: relative; }
 .step-card .stag { font-family: var(--pixel); font-size: 11px; color: var(--blue); margin-bottom: 7px; }
 .step-card h3 { font-size: 20px; margin-bottom: 8px; }
 .step-card p { color: var(--muted); font-size: 15.5px; text-wrap: pretty; }
-/* hidden quest variant */
-.step.hidden .step-node { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-050); }
-.step.hidden .step-card { border-color: rgba(245,166,35,0.4); background: linear-gradient(180deg, var(--gold-050), #fff); }
+/* hidden quest variant — sparkles & glows to stand out */
+.step.hidden .step-node {
+  border-color: var(--gold); color: var(--gold-deep); background: var(--gold-050);
+  animation: hiddenNodeGlow 2.6s ease-in-out infinite;
+}
+@keyframes hiddenNodeGlow {
+  0%, 100% { box-shadow: var(--shadow-sm); }
+  50%      { box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.16), 0 6px 22px rgba(245, 166, 35, 0.42); }
+}
+.step.hidden .step-card {
+  position: relative; overflow: hidden; isolation: isolate;
+  border-color: rgba(245, 166, 35, 0.45); background: linear-gradient(180deg, var(--gold-050), #fff);
+}
 .step.hidden .step-card .stag { color: var(--gold-deep); }
+.step.hidden .step-card > * { position: relative; z-index: 2; }
+/* diagonal light sheen sweeping across the card */
+.step.hidden .step-card::before {
+  content: ""; position: absolute; top: 0; left: -75%; width: 60%; height: 100%; z-index: 1;
+  background: linear-gradient(100deg, transparent, rgba(245, 166, 35, 0.16) 42%, rgba(255, 255, 255, 0.6) 50%, rgba(245, 166, 35, 0.16) 58%, transparent);
+  transform: skewX(-16deg); pointer-events: none;
+  animation: hiddenSheen 4.2s ease-in-out infinite;
+}
+@keyframes hiddenSheen { 0% { left: -75%; } 55%, 100% { left: 135%; } }
+/* twinkling ★ HIDDEN badge */
 .step.hidden .step-card::after {
-  content: "★ HIDDEN"; position: absolute; top: 14px; right: 16px;
+  content: "★ HIDDEN"; position: absolute; top: 14px; right: 16px; z-index: 3;
   font-family: var(--pixel); font-size: 10px; color: var(--gold-deep);
-  background: #fff; border: 1px solid rgba(245,166,35,0.4); padding: 3px 6px; border-radius: 5px;
+  background: #fff; border: 1px solid rgba(245, 166, 35, 0.4); padding: 3px 6px; border-radius: 5px;
+  animation: hiddenTwinkle 2.2s ease-in-out infinite;
+}
+@keyframes hiddenTwinkle {
+  0%, 100% { box-shadow: 0 0 0 rgba(245, 166, 35, 0); }
+  50%      { box-shadow: 0 0 13px rgba(245, 166, 35, 0.6); }
 }
 @media (min-width: 760px) { .step.hidden .step-card { text-align: left; } }
 
@@ -388,13 +428,35 @@ section { position: relative; }
 .reward-card .ricon {
   width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center;
   background: var(--blue-050); color: var(--blue); margin-bottom: 18px;
+  transition: transform 0.16s ease;
 }
+.reward-card:hover .ricon { transform: translateY(-2px) scale(1.05); }
 .reward-card .ricon svg { width: 28px; height: 28px; }
+/* per-card icon themes: blue=노트북(기술) · clay=Claude(브랜드색) · gold=장려금(보상) */
+.reward-card .ricon.blue { background: var(--blue-050); color: var(--blue); }
+.reward-card .ricon.clay { background: var(--clay-050); color: var(--clay); }
+.reward-card .ricon.gold { background: var(--gold-050); color: var(--gold-deep); }
 .reward-card .rvalue { font-size: clamp(26px, 3.4vw, 36px); font-weight: 800; letter-spacing: -0.02em; }
 .reward-card .rvalue small { font-size: 16px; font-weight: 700; color: var(--muted); }
 .reward-card h3 { font-size: 18px; margin: 4px 0 8px; }
 .reward-card p { color: var(--muted); font-size: 15px; text-wrap: pretty; }
 .reward-card .rshine { position: absolute; right: -30px; top: -30px; width: 130px; height: 130px; border-radius: 50%; background: radial-gradient(circle, rgba(245,166,35,0.16), transparent 70%); }
+/* per-card glow + top accent to match the icon theme */
+.reward-card .rshine.blue { background: radial-gradient(circle, rgba(47, 107, 255, 0.16), transparent 70%); }
+.reward-card .rshine.clay { background: radial-gradient(circle, rgba(217, 119, 87, 0.2), transparent 70%); }
+.reward-card .rshine.gold { background: radial-gradient(circle, rgba(245, 166, 35, 0.18), transparent 70%); }
+.reward-card.theme-blue { border-top: 3px solid rgba(47, 107, 255, 0.5); }
+.reward-card.theme-clay { border-top: 3px solid rgba(217, 119, 87, 0.55); }
+.reward-card.theme-gold { border-top: 3px solid rgba(245, 166, 35, 0.55); }
+/* emphasized "100%" token in the 수업 혜택 headline (reuses the solution shimmer) */
+.hl-100 {
+  font-weight: 900;
+  background: linear-gradient(100deg, var(--gold-deep), #ffd27a 38%, var(--gold) 62%, var(--gold-deep));
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 3s linear infinite;
+  filter: drop-shadow(0 2px 9px rgba(245, 166, 35, 0.3));
+}
 
 /* ============================================================
    Nexon exclusive benefits (dark)
@@ -599,4 +661,16 @@ body.admin-on .nav-lock { border-color: var(--gold); color: var(--gold-deep); ba
 }
 @media (max-width: 420px) {
   .brand .logo-x, .brand-logo.nx { display: none; }
+}
+
+/* ============================================================
+   Reduced motion — calm continuous animations for a11y
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .solution h2 .hl, .hl-100,
+  .step.hidden .step-card::before, .step.hidden .step-node, .step.hidden .step-card::after,
+  .hero-quest-tag .blink, .solution .pop,
+  .empathy-turn.pop, .empathy-turn.pop .t1 { animation: none !important; }
+  .step.hidden .step-card::before { display: none; }
+  .hl-100 { background-position: 0 0; }
 }

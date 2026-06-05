@@ -92,7 +92,7 @@ window.DEFAULT_CONTENT = {
     cards: [
       { tag: "참여자 100% 제공", icon: "laptop", value: "고급 노트북", unit: "무상 대여", title: "학습용 고급 노트북 대여", desc: "학습에 필요한 고사양 노트북을 캠프 기간 동안 무상으로 대여해 드려요. 장비 걱정 없이 바로 시작하세요." },
       { tag: "참여자 100% 제공", icon: "sparkle", value: "Claude", unit: "프리미엄 시트", title: "프리미엄 AI 시트 제공", desc: "캠프 내내 Claude 프리미엄 시트를 제공해요. 가장 강력한 AI 파트너와 함께 상상을 현실로 만들어요." },
-      { tag: "참여자 100% 지급", icon: "coin", value: "월 50만원", unit: "", title: "학습 장려금", desc: "아카데미에 참여하는 모든 모험가에게 매달 지급되는 학습 장려금이에요." }
+      { tag: "참여자 100% 지급", icon: "cash", value: "월 50만원", unit: "", title: "학습 장려금", desc: "아카데미에 참여하는 모든 모험가에게 매달 지급되는 학습 장려금이에요." }
     ]
   },
 
@@ -102,9 +102,9 @@ window.DEFAULT_CONTENT = {
     title: "넥슨이 직접 준비한 특별한 기회",
     sub: "현직자에게 배우고, 글로벌 무대에 도전하고, 실제 게임사 사옥을 밟아보는 경험.",
     cards: [
-      { tag: "CONTEST", strong: "최대 상금 9,000만원", title: "메이플스토리 글로벌 개발 콘테스트", desc: "내가 만든 세계를 글로벌 무대에 출품해 보세요." , slot: "nexon-1" },
-      { tag: "MENTORING", strong: "넥슨 현직자 강의", title: "현직자 강의 & 1:1 멘토링", desc: "실무자에게 직접 배우고, 막힐 때마다 1:1로 도움받아요.", slot: "nexon-2" },
-      { tag: "FIELD TRIP", strong: "넥슨 사옥 방문", title: "판교 넥슨 사옥 견학", desc: "진짜 게임이 만들어지는 현장을 두 눈으로 직접 확인해요.", slot: "nexon-3" }
+      { tag: "CONTEST", strong: "최대 상금 9,000만원", title: "메이플스토리 글로벌 개발 콘테스트", desc: "내가 만든 세계를 글로벌 무대에 출품해 보세요." , slot: "nexon-1", art: "assets/nexon-contest.svg" },
+      { tag: "MENTORING", strong: "넥슨 현직자 강의", title: "현직자 강의 & 1:1 멘토링", desc: "실무자에게 직접 배우고, 막힐 때마다 1:1로 도움받아요.", slot: "nexon-2", art: "assets/nexon-mentoring.svg" },
+      { tag: "FIELD TRIP", strong: "넥슨 사옥 방문", title: "판교 넥슨 사옥 견학", desc: "진짜 게임이 만들어지는 현장을 두 눈으로 직접 확인해요.", slot: "nexon-3", art: "assets/nexon-fieldtrip.svg" }
     ],
     mapleBanner: {
       tag: "OFFICIAL IP",
