@@ -1,0 +1,13 @@
+# bkit plugin state
+.bkit/
+
+# image-slot runtime sidecar (generated at runtime)
+.image-slots.state.json
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
