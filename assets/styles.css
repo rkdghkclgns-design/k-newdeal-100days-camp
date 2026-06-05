@@ -702,3 +702,19 @@ body.admin-on .nav-lock { border-color: var(--gold); color: var(--gold-deep); ba
   .adm-left .adm-hint, .adm-saved { display: none; }
   .adm-btn { padding: 7px 11px; font-size: 12px; }
 }
+/* mobile vertical rhythm + card density (phones scroll a long page) */
+@media (max-width: 600px) {
+  .sec { padding: 50px 0; }
+  .hero { padding: 100px 0 56px; }
+  .section-head { margin-bottom: 30px; }
+  .hero-chips { margin-top: 24px; }
+  .reward-card { padding: 24px; }
+  .nexon-card .nc-body { padding: 18px 18px 20px; }
+  .elig-card { padding: 22px 20px; }
+  .step-card { padding: 18px 18px; }
+  .faq-q { padding: 16px 16px; gap: 11px; }
+  .maple-banner { margin-top: 26px; }
+}
+@media (max-width: 400px) {
+  .hero h1 { font-size: clamp(24px, 7.2vw, 29px); }
+}
