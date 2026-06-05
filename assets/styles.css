@@ -250,7 +250,7 @@ section { position: relative; }
 
 /* one-line definition band */
 .define-band { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.define-inner { display: flex; align-items: center; gap: 26px; padding: 36px 0; flex-wrap: wrap; }
+.define-inner { display: flex; align-items: center; gap: 26px; padding: 36px 24px; flex-wrap: wrap; }
 .define-inner .dlabel { font-family: var(--pixel); font-size: 12px; color: var(--blue); white-space: nowrap; }
 .define-inner .dtext { font-size: clamp(18px, 2.2vw, 26px); font-weight: 700; letter-spacing: -0.02em; flex: 1; min-width: 280px; text-wrap: pretty; }
 .define-inner .dtext b { color: var(--blue); }
@@ -499,7 +499,7 @@ section { position: relative; }
    Mid / generic CTA band
    ============================================================ */
 .cta-band { background: linear-gradient(120deg, var(--blue), var(--violet)); color: #fff; text-align: center; }
-.cta-band .cb-inner { padding: 70px 0; }
+.cta-band .cb-inner { padding: 70px 24px; }
 .cta-band h2 { font-size: clamp(26px, 3.6vw, 40px); }
 .cta-band p { color: rgba(255,255,255,0.85); font-size: clamp(16px, 1.8vw, 19px); margin: 14px auto 28px; max-width: 540px; }
 
@@ -573,7 +573,7 @@ section { position: relative; }
   transform: translateY(110%); transition: transform 0.3s ease;
 }
 .sticky-bar.show { transform: translateY(0); }
-.sticky-inner { display: flex; align-items: center; gap: 18px; padding: 13px 0; }
+.sticky-inner { display: flex; align-items: center; gap: 18px; padding: 13px 24px; }
 .sticky-inner .sb-text b { font-size: 16px; }
 .sticky-inner .sb-text span { display: block; font-family: var(--pixel); font-size: 11px; color: #ff8c84; margin-top: 2px; }
 .sticky-inner .btn { margin-left: auto; }
@@ -673,4 +673,32 @@ body.admin-on .nav-lock { border-color: var(--gold); color: var(--gold-deep); ba
   .empathy-turn.pop, .empathy-turn.pop .t1 { animation: none !important; }
   .step.hidden .step-card::before { display: none; }
   .hl-100 { background-position: 0 0; }
+}
+
+/* ============================================================
+   Mobile polish
+   ============================================================ */
+@media (max-width: 720px) {
+  /* group the admin lock next to the burger on the right edge */
+  .nav-lock { margin-left: auto; }
+  .nav-burger { margin-left: 8px; }
+  .nav-inner { gap: 12px; }
+}
+@media (max-width: 600px) {
+  /* hero: smaller headline, full-width stacked CTAs for easy tapping */
+  .hero h1 { font-size: clamp(27px, 7.6vw, 33px); }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; }
+  .hero-chip { flex: 1 1 calc(50% - 10px); min-width: 0; }
+  /* let the one-line definition shrink instead of overflowing tiny screens */
+  .define-inner { gap: 10px 18px; }
+  .define-inner .dtext { min-width: 0; }
+  /* sticky bar: keep the label to one tidy line, protect the button */
+  .sticky-inner { gap: 12px; }
+  .sticky-inner .sb-text { min-width: 0; flex: 1; }
+  .sticky-inner .sb-text b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sticky-inner .btn { flex: none; padding: 12px 18px; font-size: 14.5px; }
+  /* admin bar fits narrow screens (hide hint + autosave label, shrink buttons) */
+  .adm-left .adm-hint, .adm-saved { display: none; }
+  .adm-btn { padding: 7px 11px; font-size: 12px; }
 }
